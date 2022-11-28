@@ -14,14 +14,18 @@
 
     <h2>Project Tasks</h2>
     <%= link_to "New Task", new_project_task_path(@project), data: { turbo_frame: "modal" }, class: "btn btn-primary" %>
-    <div id="tasks">No tasks to display.</div>
+    <div id="tasks">
+      <% @project.tasks.each do |task| %>
+        <%= render task %>
+      <% end %>
+    </div>
   </div>
   <div class="col-12 col-md-4">
     <h2>Summary</h2>
     <ul>
       <li><%= project_due_date(@project) %></li>
-      <li>X tasks completed</li>
-      <li>X tasks outstanding</li>
+      <li><span id="tasks-completed"><%= pluralize(@project.tasks.complete.size, "task") %></span> completed</li>
+      <li><span id="tasks-outstanding"><%= pluralize(@project.tasks.to_do.size, "task") %></span> outstanding</li>
     </ul>
   
     <h2>Team Members</h2>

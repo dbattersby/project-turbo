@@ -1,37 +1,37 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
-  # GET /tasks
   def index
     @tasks = Task.all
   end
 
-  # GET /tasks/1
   def show
   end
 
-  # GET /tasks/new
   def new
     @project = Project.find(params[:project_id])
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit
   end
 
-  # POST /tasks
   def create
     @task = Task.new(task_params)
+    @task.project_id = params[:project_id]
 
     if @task.save
-      redirect_to @task, notice: "Task was successfully created."
+      set_totals()
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @task, notice: "Task was successfully created." }
+      end
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
       redirect_to @task, notice: "Task was successfully updated."
@@ -40,20 +40,37 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1
+  def mark_as_complete
+    @task = Task.find_by(id: params[:task_id], project_id: params[:project_id])
+
+    if @task&.update(status: :complete)
+      set_totals()
+
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      # task not found with params passed, or unable to update
+    end
+  end
+
   def destroy
     @task.destroy
     redirect_to tasks_url, notice: "Task was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    def set_totals
+      @project ||= Project.find(params[:project_id])
+      @total_tasks_outstanding = @project.tasks.to_do.size
+      @total_tasks_completed = @project.tasks.complete.size
+    end
+
     def task_params
-      params.require(:task).permit(:name, :description, :status)
+      params.require(:task).permit(:name, :description, :status, :user_id)
     end
 end

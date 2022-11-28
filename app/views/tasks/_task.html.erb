@@ -1,17 +1,5 @@
-<div id="<%= dom_id task %>">
-  <p>
-    <strong>Name:</strong>
-    <%= task.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= task.description %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= task.status %>
-  </p>
-
+<div id="<%= dom_id task %>" class="border-bottom p-3 mb-3">
+  <%= button_to "Mark as complete", project_task_complete_path(task.project_id, task), data: { turbo_method: :post }, class: "float-end btn btn-outline-secondary" %>
+  <p class="lead mb-0"><%= task.name %> (<%= task.status.titleize %>)</p>
+  <%= content_tag :p, truncate(task.description, length: 50), class: "text-muted" %>
 </div>
