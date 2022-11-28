@@ -13,7 +13,7 @@
     <hr class="w-50 my-4" />
 
     <h2>Project Tasks</h2>
-    <div id="new_task"></div>
+    <%= link_to "New Task", new_project_task_path(@project), data: { turbo_frame: "modal" }, class: "btn btn-primary" %>
     <div id="tasks">No tasks to display.</div>
   </div>
   <div class="col-12 col-md-4">
