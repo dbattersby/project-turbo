@@ -1,42 +1,22 @@
 <%= form_with(model: project) do |form| %>
-  <% if project.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+  <%= render partial: "layouts/validation", locals: { record: project } %>
 
-      <ul>
-        <% project.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="form-group mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :due_date, style: "display: block" %>
-    <%= form.datetime_field :due_date %>
+  <div class="form-group mb-3">
+    <%= form.label :due_date, class: "form-label" %>
+    <%= form.datetime_field :due_date, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :active, style: "display: block" %>
-    <%= form.check_box :active %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group mb-3">
+    <%= form.submit "Save Project", class: "btn btn-success" %>
   </div>
 <% end %>

@@ -1,14 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<%= link_to "New Project", new_project_path, class: "btn btn-success float-end" %>
 
 <h1>Projects</h1>
+<p>Showing <%= pluralize(@projects.size, "project") %></p>
 
-<div id="projects">
+<div id="projects" class="mt-5">
   <% @projects.each do |project| %>
     <%= render project %>
-    <p>
-      <%= link_to "Show this project", project %>
-    </p>
   <% end %>
 </div>
-
-<%= link_to "New project", new_project_path %>
