@@ -2,13 +2,12 @@
   <div class="col-12 col-md-8">
     <div id="project-details">
       <h1><%= @project.name %></h1>
+      <%= simple_format @project.description %>
 
       <p>
         <%= link_to "Edit this project", edit_project_path(@project), class: "text-muted" %> |
         <%= link_to "Back to projects", projects_path, class: "text-muted" %>
       </p>
-
-      <%= simple_format @project.description %>
     </div>
 
     <hr class="w-50 my-4" />

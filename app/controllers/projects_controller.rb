@@ -21,7 +21,10 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to @project, notice: "Project was successfully created."
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @project, notice: "Project was successfully created." }
+      end
     else
       render :new, status: :unprocessable_entity
     end
