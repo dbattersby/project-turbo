@@ -13,13 +13,17 @@
   <body>
     <%= render partial: "layouts/nav" %>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <%= render partial: "layouts/alerts" %>
-          <%= yield %>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <%= render partial: "layouts/alerts" %>
+            <%= yield %>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
+
+    <%= render "layouts/footer" %>
   </body>
 </html>

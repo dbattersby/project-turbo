@@ -8,9 +8,7 @@
         <nav class="">
           <ul class="list-inline m-0">
             <li class="list-inline-item"><%= link_to "Home", root_path %></li>
-            <li class="list-inline-item"><%= link_to "About", about_path %></li>
-            <li class="list-inline-item"><%= link_to "Features", features_path %></li>
-            <li class="list-inline-item"><%= link_to "Contact", contact_path %></li>
+            <li class="list-inline-item"><%= link_to "Projects", projects_path %></li>
             <% if user_signed_in? %>
               <li class="list-inline-item"><%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary" %></li>
             <% else %>
