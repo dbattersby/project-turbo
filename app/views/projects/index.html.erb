@@ -1,4 +1,4 @@
-<%= link_to "New Project", new_project_path, class: "btn btn-success float-end" %>
+<%= link_to "New Project", new_project_path, data: { turbo_frame: "modal" }, class: "btn btn-success float-end" %>
 
 <h1>Projects</h1>
 <p>Showing <%= pluralize(@projects.size, "project") %></p>
