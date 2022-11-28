@@ -1,0 +1,25 @@
+<header class="bg-light pt-3 pb-2 mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-4 col-xl-2">
+        <p class="lead">Project Turbo</p>
+      </div>
+      <div class="col-8 col-xl-10 text-end">
+        <nav class="">
+          <ul class="list-inline m-0">
+            <li class="list-inline-item"><%= link_to "Home", root_path %></li>
+            <li class="list-inline-item"><%= link_to "About", about_path %></li>
+            <li class="list-inline-item"><%= link_to "Features", features_path %></li>
+            <li class="list-inline-item"><%= link_to "Contact", contact_path %></li>
+            <% if user_signed_in? %>
+              <li class="list-inline-item"><%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-secondary" %></li>
+            <% else %>
+              <li class="list-inline-item"><%= link_to "Sign In", new_user_session_path %></li>
+              <li class="list-inline-item"><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success" %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
