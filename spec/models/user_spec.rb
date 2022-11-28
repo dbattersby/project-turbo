@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before(:all) do
-    User.delete_all
+    User.destroy_all
     @user = create(:user)
   end
 

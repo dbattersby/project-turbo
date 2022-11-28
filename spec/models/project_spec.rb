@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Project, type: :model do
   before(:all) do
-    Project.delete_all
+    Project.destroy_all
     @project = create(:project)
   end
 
