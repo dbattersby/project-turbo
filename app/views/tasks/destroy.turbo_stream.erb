@@ -1,3 +1,2 @@
 <%= turbo_stream.remove dom_id(@task) %>
-<%= turbo_stream.replace "tasks-outstanding", pluralize(@total_tasks_outstanding, "task") %>
-<%= turbo_stream.replace "tasks-completed", pluralize(@total_tasks_completed, "task") %>
+<%= turbo_stream.replace "summary", partial: "projects/summary", locals: { project: @project } %>

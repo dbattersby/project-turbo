@@ -22,11 +22,7 @@
   </div>
   <div class="col-12 col-md-4">
     <h2>Summary</h2>
-    <ul>
-      <li><%= project_due_date(@project) %></li>
-      <li><span id="tasks-completed"><%= pluralize(@project.tasks.complete.size, "task") %></span> completed</li>
-      <li><span id="tasks-outstanding"><%= pluralize(@project.tasks.to_do.size, "task") %></span> outstanding</li>
-    </ul>
+    <%= render partial: "projects/summary", locals: { project: @project } %>
   
     <h2>Team Members</h2>
     <p><small><%= pluralize(@users.size, "users") %> have access to this project</small></p>
