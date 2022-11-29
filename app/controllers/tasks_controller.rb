@@ -1,14 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ edit update destroy ]
   before_action :set_project, only: %i[ new edit update create destroy ]
-
-  def index
-    @tasks = Task.all
-  end
-
-  def show
-  end
 
   def new
     @task = Task.new
