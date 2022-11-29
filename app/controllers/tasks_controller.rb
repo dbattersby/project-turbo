@@ -55,8 +55,13 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task.destroy
-    redirect_to tasks_url, notice: "Task was successfully destroyed."
+    if @task.destroy
+      set_totals()
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
+      end
+    end
   end
 
   private
@@ -65,9 +70,8 @@ class TasksController < ApplicationController
     end
 
     def set_totals
-      @project ||= Project.find(params[:project_id])
-      @total_tasks_outstanding = @project.tasks.to_do.size
-      @total_tasks_completed = @project.tasks.complete.size
+      @total_tasks_outstanding = Task.where(project_id: params[:project_id], status: :to_do).size
+      @total_tasks_completed = Task.where(project_id: params[:project_id], status: :complete).size
     end
 
     def task_params
