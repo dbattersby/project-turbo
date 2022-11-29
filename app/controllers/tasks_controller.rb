@@ -28,6 +28,7 @@ class TasksController < ApplicationController
         format.html { redirect_to @task, notice: "Task was successfully created." }
       end
     else
+      @project = @task.project
       render :new, status: :unprocessable_entity
     end
   end
@@ -40,20 +41,6 @@ class TasksController < ApplicationController
       end
     else
       render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def mark_as_complete
-    @task = Task.find_by(id: params[:task_id], project_id: params[:project_id])
-
-    if @task&.update(status: :complete)
-      set_totals()
-
-      respond_to do |format|
-        format.turbo_stream
-      end
-    else
-      # task not found with params passed, or unable to update
     end
   end
 

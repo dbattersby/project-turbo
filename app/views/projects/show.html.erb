@@ -10,10 +10,10 @@
       </p>
     </div>
 
-    <hr class="w-50 my-4" />
-
-    <h2>Project Tasks</h2>
-    <%= link_to "New Task", new_project_task_path(@project), data: { turbo_frame: "modal" }, class: "btn btn-primary" %>
+    <div class="bg-light mt-5 p-4 rounded">
+      <%= link_to "New Task", new_project_task_path(@project), data: { turbo_frame: "modal" }, class: "btn btn-primary float-end" %>
+      <h2>Project Tasks</h2>
+    </div>
     <div id="tasks">
       <% @project.tasks.each do |task| %>
         <%= render task %>

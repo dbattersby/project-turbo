@@ -1,8 +1,9 @@
 <div id="<%= dom_id task %>" class="border-bottom p-3 mb-3">
   <div class="float-end text-end">
-    <%= button_to "Mark as Complete", project_task_complete_path(task.project_id, task), data: { turbo_method: :post }, class: "btn btn-sm btn-outline-secondary mb-2" unless task.complete? %>
+    <%= button_to "Mark as Complete", project_task_path(task.project_id, task, task: { status: 'complete' }), method: :patch, class: "btn btn-sm btn-outline-secondary mb-2" unless task.complete? %>
     <%= link_to "Delete Task", project_task_path(task.project_id, task), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this task?" }, class: "text-secondary small" %>
   </div>
-  <p class="lead mb-0"><%= link_to task.name, edit_project_task_path(task.project_id, task), data: { turbo_frame: "modal" }, class: "text-dark #{'text-decoration-line-through' if task.complete? }" %></p>
-  <%= content_tag :p, truncate(task.description, length: 50), class: "text-muted" %>
+  <p class="lead mb-0"><%= link_to task.name, edit_project_task_path(task.project_id, task), data: { turbo_frame: "modal" }, class: "text-dark #{'text-muted text-decoration-line-through' if task.complete? }" %></p>
+  <%= content_tag :p, truncate(task.description, length: 50), class: "text-muted mb-1" %>
+  <p><small>Assigned to <%= task.user.username.titleize %></small></p>
 </div>
