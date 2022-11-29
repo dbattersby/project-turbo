@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to @project, notice: "Project was successfully updated."
+      redirect_to @project
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_url, notice: "Project was successfully destroyed."
+    redirect_to projects_url
   end
 
   private
