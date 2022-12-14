@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  before(:all) do
-    Project.destroy_all
+  before(:each) do
     @project = create(:project)
   end
 

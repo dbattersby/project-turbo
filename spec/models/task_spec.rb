@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  before(:all) do
-    Task.destroy_all
-    @task = create(:task, project_id: Project.first.id, user_id: User.first.id)
+  before(:each) do
+    @user = create(:user)
+    @project = create(:project)
+    @task = create(:task, project_id: @project.id, user_id: @user.id)
   end
 
   it "is using valid attributes by default" do
